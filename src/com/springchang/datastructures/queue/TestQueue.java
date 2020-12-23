@@ -2,9 +2,6 @@ package com.springchang.datastructures.queue;
 
 import java.util.ArrayDeque;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 
 /**
  * @author : 张翠山
@@ -15,15 +12,17 @@ public class TestQueue {
 
     public static void main(String[] args) {
         //测试ArrayQueue
-        //testArrayQueue();
+//        testArrayQueue();
 
         //测试LinkedQueue
-        testLinkedQueue();
+        //testLinkedQueue();
+
+        testCircleQueue();
     }
 
     //测试数组实现的队列
     public static void testArrayQueue() {
-        Queue<String> citys = new ArrayDeque<String>(10);
+        java.util.Queue<String> citys = new ArrayDeque<String>(10);
         citys.add("北京");
         citys.add("上海");
         citys.add("广州");
@@ -37,7 +36,7 @@ public class TestQueue {
     }
 
     public static void testLinkedQueue() {
-        Queue<String> citys = new LinkedList<String>();
+        java.util.Queue<String> citys = new LinkedList<String>();
         citys.add("北京");
         citys.add("上海");
         citys.add("广州");
@@ -48,5 +47,31 @@ public class TestQueue {
         citys.remove();
         citys.remove();
         System.out.println("citys = " + citys);
+    }
+
+    public static void testCircleQueue() {
+        Queue numbers = new CircleArrayQueue(5);
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+
+
+        //移除一个元素
+//        numbers.remove();
+//        numbers.remove();
+//        numbers.remove();
+//        numbers.remove();
+        System.out.println("numbers = " + numbers.toString());
+
+        //添加一个元素
+        numbers.add(5);
+        numbers.add(6);
+        numbers.add(7);
+        numbers.add(8);
+        numbers.add(9);
+
+        System.out.println("numbers = " + numbers.toString());
     }
 }
