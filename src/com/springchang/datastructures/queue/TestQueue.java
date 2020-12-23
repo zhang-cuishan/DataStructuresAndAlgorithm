@@ -17,7 +17,9 @@ public class TestQueue {
         //测试LinkedQueue
         //testLinkedQueue();
 
-        testCircleQueue();
+        //testCircleQueue();
+
+        testMyLinkedQueue();
     }
 
     //测试数组实现的队列
@@ -44,6 +46,9 @@ public class TestQueue {
         System.out.println("citys = " + citys);
 
         //出队列
+        citys.remove();
+        citys.remove();
+        citys.remove();
         citys.remove();
         citys.remove();
         System.out.println("citys = " + citys);
@@ -73,5 +78,24 @@ public class TestQueue {
         numbers.add(9);
 
         System.out.println("numbers = " + numbers.toString());
+    }
+
+    public static void testMyLinkedQueue() {
+        Queue queue = new LinkedQueue();
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+        queue.add(5);
+
+
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        queue.remove();
+
+        System.out.println("queue = " + queue.toString());
     }
 }
