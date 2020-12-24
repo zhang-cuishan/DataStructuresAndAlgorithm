@@ -9,8 +9,8 @@ public class TestStack {
     public static void main(String[] args) {
 //        testJdkStack();
 
-//        testArrayStack();
-        testLinkedStack();
+        testArrayStack();
+//        testLinkedStack();
     }
 
     /**
@@ -42,9 +42,13 @@ public class TestStack {
     public static void testArrayStack() {
         ArrayStack stack = new ArrayStack(10);
         stack.push(1);
+        System.out.printf("顶部数据是%d\n", stack.peek());
         stack.push(2);
+        System.out.printf("顶部数据是%d\n", stack.peek());
         stack.push(3);
+        System.out.printf("顶部数据是%d\n", stack.peek());
         stack.push(4);
+        System.out.printf("顶部数据是%d\n", stack.peek());
         stack.push(5);
         stack.push(6);
         stack.push(7);

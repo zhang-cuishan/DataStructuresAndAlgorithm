@@ -30,7 +30,10 @@ public class ArrayStack implements Stack{
 
     @Override
     public int peek() {
-        return 0;
+        if(top == -1) {
+            throw new RuntimeException("栈为空，不能读取数据");
+        }
+        return stack[top];
     }
 
     @Override
