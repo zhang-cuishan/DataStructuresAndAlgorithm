@@ -14,13 +14,6 @@ public interface Stack {
 
 
     /**
-     * 测试堆栈是否已满
-     * @return
-     */
-    boolean isFull();
-
-
-    /**
      * 查看堆栈顶部的对象，但不从堆栈中移除它
      * @return
      */

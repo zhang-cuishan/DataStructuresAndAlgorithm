@@ -9,7 +9,8 @@ public class TestStack {
     public static void main(String[] args) {
 //        testJdkStack();
 
-        testArrayStack();
+//        testArrayStack();
+        testLinkedStack();
     }
 
     /**
@@ -39,7 +40,7 @@ public class TestStack {
      * 测试ArrayStack的使用
      */
     public static void testArrayStack() {
-        Stack stack = new ArrayStack(10);
+        ArrayStack stack = new ArrayStack(10);
         stack.push(1);
         stack.push(2);
         stack.push(3);
@@ -56,6 +57,36 @@ public class TestStack {
 
         System.out.printf("弹栈 = %d\n", stack.pop());
         System.out.printf("弹栈 = %d\n", stack.pop());
+        System.out.printf("弹栈 = %d\n", stack.pop());
+        System.out.printf("弹栈 = %d\n", stack.pop());
+        System.out.printf("弹栈 = %d\n", stack.pop());
+        System.out.printf("弹栈 = %d\n", stack.pop());
+        System.out.printf("弹栈 = %d\n", stack.pop());
+        System.out.printf("弹栈 = %d\n", stack.pop());
+        System.out.printf("弹栈 = %d\n", stack.pop());
+        System.out.printf("弹栈 = %d\n", stack.pop());
+        System.out.printf("栈内容 = %s\n", stack.toString());
+        System.out.printf("栈是否已空?%s\n", stack.isEmpty());
+    }
+
+    /**
+     * 测试LinkedStack的使用
+     */
+    public static void testLinkedStack() {
+        Stack stack = new LinkedStatck();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+        stack.push(6);
+        stack.push(7);
+        stack.push(8);
+        stack.push(9);
+        stack.push(10);
+        System.out.printf("栈内容 = %s\n", stack.toString());
+        System.out.printf("10的位置 = %d\n", stack.search(10));
+
         System.out.printf("弹栈 = %d\n", stack.pop());
         System.out.printf("弹栈 = %d\n", stack.pop());
         System.out.printf("弹栈 = %d\n", stack.pop());

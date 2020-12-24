@@ -24,7 +24,6 @@ public class ArrayStack implements Stack{
         return top == -1;
     }
 
-    @Override
     public boolean isFull() {
         return top == maxSize-1;
     }
