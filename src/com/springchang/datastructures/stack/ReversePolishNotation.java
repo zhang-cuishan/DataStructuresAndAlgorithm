@@ -4,7 +4,10 @@ import java.util.*;
 import java.util.Stack;
 
 /**
- * 逆波兰表达式算法
+ * 完整的逆波兰表达式算法
+ * 1).支持四则运算以及括号解析
+ * 2).支持多位数，支持浮点数
+ * 3).兼容处理，过滤任何空白字符，包括：空格、制表符、换页符
  * @author : 张翠山
  */
 public class ReversePolishNotation {
@@ -17,8 +20,11 @@ public class ReversePolishNotation {
         while (true) {
             System.out.println("请输入表达式:");
             String str = scanner.nextLine();
-            str = str.trim().replaceAll(" ","");
-            System.out.printf("%s = %d\n", str, calculate(toSuffixExpression(parse(str))));
+            //用正则表达式去掉空白符，包括空格、制表符、换页符等
+            str = str.trim().replaceAll("\\s","");
+            double result = calculate(toSuffixExpression(parse(str)));
+            System.out.printf("%s = %f\n", str, result);
+            System.out.println(result);
         }
     }
 
@@ -77,8 +83,8 @@ public class ReversePolishNotation {
      * @param suffixExpressionList 后缀表达式
      * @return
      */
-    private static int calculate(List<String> suffixExpressionList) {
-        int result = 0;
+    private static double calculate(List<String> suffixExpressionList) {
+        double result = 0;
 
         //定义一个栈
         Stack<String> numStack = new java.util.Stack<String>();
@@ -90,9 +96,9 @@ public class ReversePolishNotation {
                 numStack.push(str);
             } else if(isOperation(str)) {
                 //如果是一个操作符，则计算
-                int num1 = Integer.parseInt(numStack.pop());
-                int num2 = Integer.parseInt(numStack.pop());
-                int temp = 0;
+                double num1 = Double.parseDouble(numStack.pop());
+                double num2 = Double.parseDouble(numStack.pop());
+                double temp = 0;
                 if("+".equals(str)) {
                     temp = num1 + num2;
                 } else if("-".equals(str)) {
@@ -108,7 +114,7 @@ public class ReversePolishNotation {
             }
         }
 
-        return  Integer.parseInt(numStack.peek());
+        return Double.parseDouble(numStack.peek());
     }
 
     /**
@@ -143,18 +149,22 @@ public class ReversePolishNotation {
      * @return
      */
     public static List<String> parse(String expression) {
+        //替掉表达式中的空白符
+        expression = expression.replaceAll("\\s", "");
+
         List<String> list = new ArrayList<String>();
 
         int index = 0;
         while (index < expression.length()) {
             char ch = expression.charAt(index);
-            if(isNumber(ch)) {
+            //如果扫描到的单个字符是数字或者小数点
+            if(isNumber(ch) || '.' == ch) {
                 //如果是数字则，判断截止位置,index是数字开始位置，自己找到结束位置
                 int endIndex = index;
                 int i = index + 1;
                 for (; i < expression.length(); i++) {
                     char ch1 = expression.charAt(i);
-                    if(!isNumber(ch1)) {
+                    if(!isNumber(ch1) && '.'!= ch1) {
                         endIndex = i;
                         break;
                     }
@@ -168,8 +178,11 @@ public class ReversePolishNotation {
                 list.add(numberStr);
                 //指标后移
                 index = endIndex;
-            } else {
+            } else if(isOperation(ch+"")) {//如果扫描的字符是操作符
                 //如果是操作符，则直接添加，index后移
+                list.add(ch+"");
+                index++;
+            } else if ('(' == ch || ')' == ch) {//如果扫描的字符是左括号或者右括号
                 list.add(ch+"");
                 index++;
             }
@@ -180,11 +193,13 @@ public class ReversePolishNotation {
 
 
     /**
-     * 判断字符串是否是数字,目前只处理整数
+     * 判断字符串是否是数字,处理浮点数
      * @param str
      * @return
      */
     private static boolean isNumber(String str) {
+        str = str.replace(".", "");
+
         for (int i = 0; i < str.length(); i++) {
             char ch = str.charAt(i);
             if(!isNumber(ch)) {
