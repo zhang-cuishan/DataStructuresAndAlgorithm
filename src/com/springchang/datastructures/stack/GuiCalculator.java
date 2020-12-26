@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,9 @@ public class GuiCalculator {
     private JButton[] jButtons = new JButton[16];
 
     private String expression = "";
+
+    private ReversePolishNotation reversePolishNotation = new ReversePolishNotation();
+
 
     /**
      * 构造函数
@@ -60,7 +64,11 @@ public class GuiCalculator {
                     //用户击中等号，计算表达式
                     if("=".equalsIgnoreCase(actionCommand)) {
                         String str = jTextField.getText().trim();
-                        jTextField.setText(str + "=" + calculator(str));
+
+                        double resutl = ReversePolishNotation.calc(str);
+                        DecimalFormat fmt = new DecimalFormat("##0.00");
+
+                        jTextField.setText(str + "=" + fmt.format(resutl));
                     } else {
                         //用户击中其他数字，向表达式添加数字
                         expression += actionCommand;

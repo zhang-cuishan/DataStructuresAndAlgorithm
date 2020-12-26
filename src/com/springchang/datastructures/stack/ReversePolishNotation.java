@@ -20,12 +20,15 @@ public class ReversePolishNotation {
         while (true) {
             System.out.println("请输入表达式:");
             String str = scanner.nextLine();
-            //用正则表达式去掉空白符，包括空格、制表符、换页符等
-            str = str.trim().replaceAll("\\s","");
             double result = calculate(toSuffixExpression(parse(str)));
             System.out.printf("%s = %f\n", str, result);
             System.out.println(result);
         }
+    }
+
+    //对外保留接口，提供计算服务
+    public static double calc(String str) {
+        return calculate(toSuffixExpression(parse(str)));
     }
 
     /**
