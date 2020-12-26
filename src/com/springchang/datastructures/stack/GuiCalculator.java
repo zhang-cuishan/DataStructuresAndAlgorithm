@@ -1,6 +1,7 @@
 package com.springchang.datastructures.stack;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class GuiCalculator {
 
-    private JButton[] jButtons = new JButton[16];
+    private JButton[] jButtons = new JButton[20];
 
     private String expression = "";
 
@@ -35,24 +36,30 @@ public class GuiCalculator {
         jTextField.setFont(new Font("楷体",Font.BOLD,16));
 
         //指定面板的布局为GridLayout，4行4列，间隙为5
-        jpanel.setLayout(new GridLayout(4,4,5,5));
+        jpanel.setLayout(new GridLayout(5,4,5,5));
+        jpanel.setBorder(new EmptyBorder(15, 15, 15, 15) );//adds margin to panel
 
-        jButtons[0] = new JButton("7");
-        jButtons[1] = new JButton("8");
-        jButtons[2] = new JButton("9");
-        jButtons[3] = new JButton("/");
-        jButtons[4] = new JButton("4");
-        jButtons[5] = new JButton("5");
-        jButtons[6] = new JButton("6");
-        jButtons[7] = new JButton("*");
-        jButtons[8] = new JButton("1");
-        jButtons[9] = new JButton("2");
-        jButtons[10] = new JButton("3");
-        jButtons[11] = new JButton("-");
-        jButtons[12] = new JButton("0");
-        jButtons[13] = new JButton(".");
-        jButtons[14] = new JButton("=");
-        jButtons[15] = new JButton("+");
+        jButtons[0] = new JButton("(");
+        jButtons[1] = new JButton(")");
+        jButtons[2] = new JButton("C");
+        jButtons[3] = new JButton("<");
+
+        jButtons[4] = new JButton("7");
+        jButtons[5] = new JButton("8");
+        jButtons[6] = new JButton("9");
+        jButtons[7] = new JButton("/");
+        jButtons[8] = new JButton("4");
+        jButtons[9] = new JButton("5");
+        jButtons[10] = new JButton("6");
+        jButtons[11] = new JButton("*");
+        jButtons[12] = new JButton("1");
+        jButtons[13] = new JButton("2");
+        jButtons[14] = new JButton("3");
+        jButtons[15] = new JButton("-");
+        jButtons[16] = new JButton("0");
+        jButtons[17] = new JButton(".");
+        jButtons[18] = new JButton("=");
+        jButtons[19] = new JButton("+");
 
         for (int i = 0; i < jButtons.length; i++) {
             jpanel.add(jButtons[i]);
@@ -69,6 +76,16 @@ public class GuiCalculator {
                         DecimalFormat fmt = new DecimalFormat("##0.00");
 
                         jTextField.setText(str + "=" + fmt.format(resutl));
+                    } else if("C".equalsIgnoreCase(actionCommand)) {
+                        //用户选中清空
+                        expression = "";
+                        jTextField.setText(expression);
+                    } else if("<".equalsIgnoreCase(actionCommand)) {
+                        //用户击中其他数字，向表达式添加数字
+                        if(expression.length() > 0) {
+                            expression = expression.substring(0, expression.length() - 1);
+                            jTextField.setText(expression);
+                        }
                     } else {
                         //用户击中其他数字，向表达式添加数字
                         expression += actionCommand;
@@ -78,10 +95,12 @@ public class GuiCalculator {
             });
         }
 
+        jTextField.setPreferredSize(new Dimension(0, 40));
+        jTextField.setHorizontalAlignment(JTextField.RIGHT);
         jFrame.add(jTextField, BorderLayout.NORTH);
         jFrame.add(jpanel, BorderLayout.CENTER);    //添加面板到容器
 
-        jFrame.setBounds(300,200,250,300);
+        jFrame.setBounds(300,200,300,300);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

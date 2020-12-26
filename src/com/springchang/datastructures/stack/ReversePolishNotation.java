@@ -26,7 +26,7 @@ public class ReversePolishNotation {
         }
     }
 
-    //对外保留接口，提供计算服务
+    //对外暴露接口，提供计算服务
     public static double calc(String str) {
         return calculate(toSuffixExpression(parse(str)));
     }
