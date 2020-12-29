@@ -1,7 +1,5 @@
 package com.springchang.datastructures.sort;
 
-import java.util.Arrays;
-
 /**
  * 选择排序
  * @author : 张翠山
