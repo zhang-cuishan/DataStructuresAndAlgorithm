@@ -1,6 +1,7 @@
 package com.springchang.datastructures.sort;
 
 /**
+ * 归并排序
  * @author : 张翠山
  */
 public class MegerSort {
