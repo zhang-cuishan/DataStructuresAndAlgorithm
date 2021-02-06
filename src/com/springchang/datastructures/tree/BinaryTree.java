@@ -18,6 +18,31 @@ public class BinaryTree {
         }
     }
 
+    //前序查找
+    public Node preSearch(Node node, int id) {
+        System.out.println("先序查询");
+        if(node.getId() == id) {
+            return node;
+        }
+
+        Node findNode = null;
+        if (node.getLeft() != null) {
+            findNode = preSearch(node.getLeft(), id);
+        }
+        if(findNode != null) {
+            return findNode;
+        }
+
+        if(node.getRight() != null) {
+            findNode = preSearch(node.getRight(), id);
+        }
+        if(findNode != null) {
+            return findNode;
+        }
+
+        return null;
+    }
+
     //中序遍历
     public void midTravel(Node root) {
 
@@ -28,6 +53,32 @@ public class BinaryTree {
         if(root.getRight() != null) {
             midTravel(root.getRight());
         }
+    }
+
+    //中序查找
+    public Node midSearch(Node node, int id) {
+
+        Node findNode = null;
+        if (node.getLeft() != null) {
+            findNode = midSearch(node.getLeft(), id);
+        }
+        if(findNode != null) {
+            return findNode;
+        }
+
+        System.out.println("中序查询");
+        if(node.getId() == id) {
+            return node;
+        }
+
+        if(node.getRight() != null) {
+            findNode = midSearch(node.getRight(), id);
+        }
+        if(findNode != null) {
+            return findNode;
+        }
+
+        return null;
     }
 
     //后序遍历
@@ -44,14 +95,39 @@ public class BinaryTree {
         System.out.println("root = " + root);
     }
 
+    //后序查找
+    public Node afterSearch(Node node, int id) {
+
+        Node findNode = null;
+        if (node.getLeft() != null) {
+            findNode = afterSearch(node.getLeft(), id);
+        }
+        if(findNode != null) {
+            return findNode;
+        }
+
+        if(node.getRight() != null) {
+            findNode = afterSearch(node.getRight(), id);
+        }
+        if(findNode != null) {
+            return findNode;
+        }
+
+        System.out.println("后序查询");
+        if(node.getId() == id) {
+            return node;
+        }
+
+        return null;
+    }
 
     public static void main(String[] args) {
         BinaryTree binaryTree = new BinaryTree();
         Node root = new Node(1, "松江");
         Node node1 = new Node(2, "吴用");
         Node node2 = new Node(3, "卢俊义");
-        Node node3 = new Node(5, "关胜");
         Node node4 = new Node(4, "林冲");
+        Node node3 = new Node(5, "关胜");
 
         root.setLeft(node1);
         root.setRight(node2);
@@ -69,6 +145,19 @@ public class BinaryTree {
         //后序遍历
         System.out.println("二叉树的后序遍历");
         binaryTree.afterTravel(root);
+
+        int key = 5;
+        System.out.println("先序搜索数字 = " + key);
+        Node resultNode1 = binaryTree.preSearch(root, key);
+        System.out.println("node = " + resultNode1);
+
+        System.out.println("中序搜索数字 = " + key);
+        Node resultNode2 = binaryTree.midSearch(root, key);
+        System.out.println("node = " + resultNode2);
+
+        System.out.println("后序搜索数字 = " + key);
+        Node resultNode3 = binaryTree.afterSearch(root, key);
+        System.out.println("node = " + resultNode3);
     }
 }
 
