@@ -121,6 +121,28 @@ public class BinaryTree {
         return null;
     }
 
+    public void delNode(Node node, int id) {
+        if(node.getLeft() == null && node.getRight() == null && node.getId() == id) {
+            node = null;
+        }
+
+        if(node.getLeft() != null && node.getLeft().getId() == id) {
+            node.setLeft(null);
+            return;
+        }
+        if(node.getRight() != null && node.getRight().getId() == id) {
+            node.setRight(null);
+            return;
+        }
+
+        if(node.getLeft() != null) {
+            delNode(node.getLeft(), id);
+        }
+        if(node.getRight() != null) {
+            delNode(node.getRight(), id);
+        }
+    }
+
     public static void main(String[] args) {
         BinaryTree binaryTree = new BinaryTree();
         Node root = new Node(1, "松江");
@@ -158,6 +180,13 @@ public class BinaryTree {
         System.out.println("后序搜索数字 = " + key);
         Node resultNode3 = binaryTree.afterSearch(root, key);
         System.out.println("node = " + resultNode3);
+
+        System.out.println("删除前二叉树前序遍历结果：");
+        binaryTree.preTravel(root);
+
+        binaryTree.delNode(root, 4);
+        System.out.println("删除后二叉树前序遍历结果：");
+        binaryTree.preTravel(root);
     }
 }
 
