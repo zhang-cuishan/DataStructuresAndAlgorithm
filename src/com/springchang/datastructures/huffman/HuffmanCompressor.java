@@ -20,6 +20,12 @@ public class HuffmanCompressor extends JFrame {
 
     public static final int JFRAME_HEIGHT = 400;
 
+    public JButton startBtn = new JButton("开始");
+
+    public JButton stopBtn = new JButton("停止");
+
+    public JTextField chooseTextField = new JTextField("请选择要压缩的文件");
+
     public static void main(String[] args) {
         HuffmanCompressor huffmanCompressor = new HuffmanCompressor();
         huffmanCompressor.launch();
@@ -34,7 +40,7 @@ public class HuffmanCompressor extends JFrame {
         fileInputPanle.setPreferredSize(new Dimension(JFRAME_WIDTH, 60));
 
         JButton scannerButton = new JButton("浏览");
-        JTextField chooseTextField = new JTextField("请选择要压缩的文件");
+
         chooseTextField.setPreferredSize(new Dimension(220, 20));
 
         fileInputPanle.add(chooseTextField);
@@ -93,9 +99,13 @@ public class HuffmanCompressor extends JFrame {
 
         JPanel operationPanel = new JPanel();
         operationPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        operationPanel.add(new JButton("开始"));
-        operationPanel.add(new JButton("停止"));
-        operationPanel.add(new JButton("关闭"));
+
+        startBtn.addActionListener(new ButtonAction(this));
+
+        stopBtn.addActionListener(new ButtonAction(this));
+
+        operationPanel.add(startBtn);
+        operationPanel.add(stopBtn);
 
         southPanel.add(operationPanel, BorderLayout.CENTER);
 
