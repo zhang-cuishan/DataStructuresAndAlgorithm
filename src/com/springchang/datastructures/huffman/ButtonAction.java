@@ -21,6 +21,7 @@ public class ButtonAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if("开始".equals(e.getActionCommand())) {
             String sourceString = huffmanCompressor.chooseTextField.getText().trim();
+            huffmanCode.zipFile(sourceString, "D:/new.new");
         } else if("停止".equals(e.getActionCommand())) {
             System.out.println("停止");
         } else {

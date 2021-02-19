@@ -20,7 +20,9 @@ public class HuffmanCompressor extends JFrame {
 
     public static final int JFRAME_HEIGHT = 400;
 
-    public JButton startBtn = new JButton("开始");
+    public JButton startBtn = new JButton("压缩");
+
+    public JButton unzipBtn = new JButton("解压");
 
     public JButton stopBtn = new JButton("停止");
 

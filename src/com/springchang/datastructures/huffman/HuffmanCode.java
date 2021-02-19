@@ -47,14 +47,14 @@ public class HuffmanCode {
 
 
         }catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }finally {
             try {
                 is.close();
                 oos.close();
                 os.close();
             }catch (Exception e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
 
