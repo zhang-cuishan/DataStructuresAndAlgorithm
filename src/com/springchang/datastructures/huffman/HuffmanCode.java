@@ -12,6 +12,8 @@ public class HuffmanCode {
 
     static Map<Byte, String> huffmanCodes = new HashMap<Byte,String>();
 
+    static int zeroCount = 0;
+
     /**
      * 使用一个方法，将前面的方法封装起来，便于我们的调用.
      * @param bytes 原始的字符串对应的字节数组
@@ -26,7 +28,7 @@ public class HuffmanCode {
     }
 
     public static void main(String[] args) throws UnsupportedEncodingException {
-        String str = "Hello Java";
+        String str = "Hello Java, This is Java Source String, Pelese decode here.";
         byte[] sourceBytes = huffmanZip(str.getBytes());
         System.out.println("huffmanCodeBytes = " + Arrays.toString(sourceBytes));
         byte[] jiema = decode(huffmanCodes, sourceBytes);
@@ -131,6 +133,10 @@ public class HuffmanCode {
             String binaryValue = null;
             if(i+8 > stringBuilder.length()) {
                 binaryValue = stringBuilder.substring(i);
+                int j = i;
+                while(j < stringBuilder.length()-1 && '0' == stringBuilder.charAt(j++)) {
+                    zeroCount++;
+                }
             } else {
                 binaryValue = stringBuilder.substring(i, i + 8);
             }
@@ -157,6 +163,11 @@ public class HuffmanCode {
         if(flag) {
             return str.substring(str.length() - 8);
         } else {
+            //补上缺失调的0
+            Byte key = -1;
+            while(zeroCount-->0) {
+                str = "0"+str;
+            }
             return str;
         }
     }
@@ -176,7 +187,8 @@ public class HuffmanCode {
             byte b = huffmanBytes[i];
             //判断是不是最后一个字节
             boolean flag = (i == huffmanBytes.length - 1);
-            stringBuilder.append(byteToBitString(!flag, b));
+            String temp = byteToBitString(!flag, b);
+            stringBuilder.append(temp);
         }
 
         //把字符串安装指定的赫夫曼编码进行解码
